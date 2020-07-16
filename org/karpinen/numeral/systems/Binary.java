@@ -5,17 +5,23 @@ import org.karpinen.numeral.utils.BaseConvert;
 
 import java.util.Arrays;
 
+/*
+This class is used as a middle ground between almost all the other number systems in terms of conversion. 
+ */
 public class Binary extends Number implements BaseConvert {
 
+    //Constructor.
     public Binary(String input)  {
         super(input, 2, Arrays.asList('0', '1'));
     }
 
+    //Method Overloading.
     public int convertToBase10() {
         return convertToBase10(getInputString());
     }
 
     @Override
+    //Converts binary to decimal by long division of 2.
     public int convertToBase10(String s) {
         char[] binary = new StringBuilder(s).reverse().toString().toCharArray();
         int iteration = 0;
@@ -28,16 +34,19 @@ public class Binary extends Number implements BaseConvert {
     }
 
     @Override
+    //Returns the input as it's already Base2
     public String convertToBase2() {
         return getInputString();
     }
 
     @Override
+    //Converts Binary to Octal
     public String convertToBase8() {
         return convertByBitGroups(3);
     }
 
     @Override
+    //Converts Binary to Hexadecimal.
     public String convertToBase16() {
         return convertByBitGroups(4);
     }
@@ -56,39 +65,37 @@ public class Binary extends Number implements BaseConvert {
         return c;
     }
 
-    //Reusable method to grab a substring based on a specified size.
+    //Retrieve a substring by size and length. This is for @inputString that's inherited.
     private String getSubstringBySize(int size, int length) {
         return getInputString().substring(length - size, length);
     }
 
     /*
-    This method has the capability to recognize when a number needs a hexadecimal digit, it will add it as so.
-    This method takes a substring of a specified size, converts it to decimal, and appends it to the
-    StringBuilder. The reason for decrementing is we start at the end of the string.
+    In the following method we start at the beginning of the string. To calculate the startpoint of the substring
+    we use the (f) length - size. We then decrement length by the specified grouping size. This results in being
+    able to get size specific substrings of the string itself.
      */
     private String convertByBitGroups(int size) {
         StringBuilder sb = new StringBuilder();
-        //This specifies how many times we can evenly substring a string into a certain size.
+        //@Iterations refers to how many groupings of the specified size we can fit into the original string.
         int iterations = getInputString().length() / size;
-        //This length variable becomes decremented as the string is continually broken into smaller substrings.
+        //@length becomes decremented as the string is broken into smaller substrings by the specified size.
         int length = getInputString().length();
         for(int i = 0; i < iterations; i++) {
-            //Current substring.
             String substring = getSubstringBySize(size, length);
-            //Current decimal value of substring.
             int currentConversion = convertToBase10(substring);
-            //Hexadecimal check on substring.
+
+            //This following method checks to see if the substring decimal value is in the range of Hex.
             if(currentConversion > 9 && currentConversion < 16)  {
                 sb.append(getHexadecimalEquivalent(currentConversion));
             }else{
-                //In this case currentConversion < 9
                 sb.append(currentConversion);
             }
-            //Decrement to next substring starting point.
+            //Decrement (f) length - size.
             length -= size;
         }
+        //Looks for any remaining bits. If it finds any, it will convert it to decimal and append it to the output.
         boolean hasRemainder = getInputString().length() % size > 0;
-        //Looks for any remaining bits. If it finds any, it will convert it to decimal and append it.
         if(hasRemainder) {
             String remainder = getInputString().substring(length - (getInputString().length() % size), length);
             sb.append(convertToBase10(remainder));
