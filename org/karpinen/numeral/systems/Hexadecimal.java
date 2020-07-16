@@ -1,40 +1,32 @@
-package org.karpinen.system.numerical.type;
+package org.karpinen.numeral.systems;
 
-import org.karpinen.system.numerical.core.Numeric;
-
+import org.karpinen.numeral.core.Number;
+import org.karpinen.numeral.utils.BaseConvert;
 import java.util.Arrays;
-import java.util.List;
 
-public class Hexadecimal extends Numeric implements Numeric.BaseConversion {
-    List<Character> constraint = Arrays.asList
-            ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
+public class Hexadecimal extends Number implements BaseConvert {
+    Binary b;
 
-    public Hexadecimal(Object object) {
-        super(object);
-        setBase(16);
-        setCharacterConstraint(constraint);
-        setLimit(64);
+    public Hexadecimal(String s) {
+        super(s, 16 , Arrays.asList('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'));
+        init();
+    }
+
+    public int convertToBase10() {
+        return convertToBase10(getInputString());
     }
 
     @Override
-    public int toDecimal() {
-        Binary b = new Binary(toBinary());
-        return b.toDecimal();
+    public int convertToBase10(String s) {
+        return b.convertToBase10();
+    }
+
+    private void init() {
+        b = new Binary(convertToBase2());
     }
 
     @Override
-    public String toOctal() {
-        Binary b = new Binary(toBinary());
-        return b.toOctal();
-    }
-
-    @Override
-    public String toHexadecimal() {
-        return getInputString();
-    }
-
-    @Override
-    public String toBinary() {
+    public String convertToBase2() {
         StringBuilder bin = new StringBuilder();
         for (char c : getInputString().toCharArray()) {
             switch (c) {
@@ -48,7 +40,7 @@ public class Hexadecimal extends Numeric implements Numeric.BaseConversion {
                 case '7': bin.append("0111"); break;
                 case '8': bin.append("1000"); break;
                 case '9': bin.append("1001"); break;
-                case 'A': bin.append("0010"); break;
+                case 'A': bin.append("1010"); break;
                 case 'B': bin.append("1011"); break;
                 case 'C': bin.append("1100"); break;
                 case 'D': bin.append("1101"); break;
@@ -57,5 +49,15 @@ public class Hexadecimal extends Numeric implements Numeric.BaseConversion {
             }
         }
         return bin.toString();
+    }
+
+    @Override
+    public String convertToBase8() {
+        return b.convertToBase8();
+    }
+
+    @Override
+    public String convertToBase16() {
+        return b.convertToBase16();
     }
 }
