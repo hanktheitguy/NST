@@ -1,4 +1,4 @@
-package org.karpinen.v1.core.gui;
+package org.karpinen.gui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

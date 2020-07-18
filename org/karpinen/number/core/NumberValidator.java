@@ -1,6 +1,4 @@
-package org.karpinen.v2.number.core;
-
-import org.karpinen.v2.number.core.NumberBase;
+package org.karpinen.number.core;
 
 import java.util.List;
 

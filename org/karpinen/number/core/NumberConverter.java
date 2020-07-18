@@ -1,4 +1,4 @@
-package org.karpinen.v2.number.core;
+package org.karpinen.number.core;
 
 public class NumberConverter {
 

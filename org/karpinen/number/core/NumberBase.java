@@ -1,4 +1,4 @@
-package org.karpinen.v2.number.core;
+package org.karpinen.number.core;
 
 import java.util.Arrays;
 import java.util.List;
