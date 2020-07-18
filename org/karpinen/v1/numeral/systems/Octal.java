@@ -1,7 +1,7 @@
-package org.karpinen.numeral.systems;
+package org.karpinen.v1.numeral.systems;
 
-import org.karpinen.numeral.core.Number;
-import org.karpinen.numeral.utils.BaseConvert;
+import org.karpinen.v1.numeral.core.Number;
+import org.karpinen.v1.numeral.utils.BaseConvert;
 
 import java.util.Arrays;
 

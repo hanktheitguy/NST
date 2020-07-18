@@ -1,14 +1,17 @@
-package org.karpinen.numeral.systems;
+package org.karpinen.v1.numeral.systems;
 
-import org.karpinen.numeral.core.Number;
-import org.karpinen.numeral.utils.BaseConvert;
+import org.karpinen.v1.numeral.core.Number;
+import org.karpinen.v1.numeral.utils.BaseConvert;
 
+import java.io.StringReader;
 import java.util.Arrays;
 
 /*
-This class is used as a middle ground between almost all the other number systems in terms of conversion. 
+This class is used as a middle ground between almost all the other number systems in terms of conversion.
  */
 public class Binary extends Number implements BaseConvert {
+
+    StringReader reader;
 
     //Constructor.
     public Binary(String input)  {
@@ -70,36 +73,30 @@ public class Binary extends Number implements BaseConvert {
         return getInputString().substring(length - size, length);
     }
 
-    /*
-    In the following method we start at the beginning of the string. To calculate the startpoint of the substring
-    we use the (f) length - size. We then decrement length by the specified grouping size. This results in being
-    able to get size specific substrings of the string itself.
-     */
     private String convertByBitGroups(int size) {
         StringBuilder sb = new StringBuilder();
-        //@Iterations refers to how many groupings of the specified size we can fit into the original string.
         int iterations = getInputString().length() / size;
-        //@length becomes decremented as the string is broken into smaller substrings by the specified size.
         int length = getInputString().length();
         for(int i = 0; i < iterations; i++) {
             String substring = getSubstringBySize(size, length);
             int currentConversion = convertToBase10(substring);
-
-            //This following method checks to see if the substring decimal value is in the range of Hex.
             if(currentConversion > 9 && currentConversion < 16)  {
                 sb.append(getHexadecimalEquivalent(currentConversion));
             }else{
                 sb.append(currentConversion);
             }
-            //Decrement (f) length - size.
             length -= size;
         }
-        //Looks for any remaining bits. If it finds any, it will convert it to decimal and append it to the output.
+        return concatRemaining(length, size, sb).reverse().toString();
+    }
+
+    private StringBuilder concatRemaining(int length, int size, StringBuilder s) {
+        StringBuilder sb = s;
         boolean hasRemainder = getInputString().length() % size > 0;
         if(hasRemainder) {
             String remainder = getInputString().substring(length - (getInputString().length() % size), length);
             sb.append(convertToBase10(remainder));
         }
-        return sb.reverse().toString();
+        return sb;
     }
 }

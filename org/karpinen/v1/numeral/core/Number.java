@@ -1,4 +1,4 @@
-package org.karpinen.numeral.core;
+package org.karpinen.v1.numeral.core;
 
 import java.util.List;
 
