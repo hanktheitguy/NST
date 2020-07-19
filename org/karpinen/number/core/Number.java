@@ -32,6 +32,10 @@ public class Number {
         }
     }
 
+    public NumberBase getBase() {
+        return base;
+    }
+
     //Set's the input variable value.
     private void setInput(String s) {
         this.input = s;

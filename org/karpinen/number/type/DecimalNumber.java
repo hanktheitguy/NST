@@ -1,6 +1,5 @@
 package org.karpinen.number.type;
 
-import org.karpinen.v1.numeral.systems.Binary;
 import org.karpinen.number.core.BaseConvert;
 import org.karpinen.number.core.Number;
 
