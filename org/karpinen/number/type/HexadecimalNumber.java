@@ -1,34 +1,20 @@
-package org.karpinen.numeral.systems;
+package org.karpinen.number.type;
 
-import org.karpinen.numeral.core.Number;
-import org.karpinen.numeral.utils.BaseConvert;
-import java.util.Arrays;
+import org.karpinen.number.core.BaseConvert;
+import org.karpinen.number.core.Number;
 
-public class Hexadecimal extends Number implements BaseConvert {
-    Binary b;
+public class HexadecimalNumber extends Number implements BaseConvert {
+    private BinaryNumber bn;
 
-    public Hexadecimal(String s) {
-        super(s, 16 , Arrays.asList('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'));
-        init();
-    }
-
-    public int convertToBase10() {
-        return convertToBase10(getInputString());
+    public HexadecimalNumber(String s) {
+        super(s, 16);
+        bn = new BinaryNumber(base2());
     }
 
     @Override
-    public int convertToBase10(String s) {
-        return b.convertToBase10();
-    }
-
-    private void init() {
-        b = new Binary(convertToBase2());
-    }
-
-    @Override
-    public String convertToBase2() {
+    public String base2() {
         StringBuilder bin = new StringBuilder();
-        for (char c : getInputString().toCharArray()) {
+        for (char c : getInput().toCharArray()) {
             switch (c) {
                 case '0': bin.append("0000"); break;
                 case '1': bin.append("0001"); break;
@@ -52,12 +38,17 @@ public class Hexadecimal extends Number implements BaseConvert {
     }
 
     @Override
-    public String convertToBase8() {
-        return b.convertToBase8();
+    public String base8() {
+        return bn.base8();
     }
 
     @Override
-    public String convertToBase16() {
-        return b.convertToBase16();
+    public int base10() {
+        return bn.base10();
+    }
+
+    @Override
+    public String base16() {
+        return getInput();
     }
 }

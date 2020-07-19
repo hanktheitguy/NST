@@ -1,6 +1,6 @@
-package org.karpinen.core.load;
+package org.karpinen.load;
 
-import org.karpinen.core.gui.GUI;
+import org.karpinen.gui.GUI;
 
 public class ProgramLoad {
 
