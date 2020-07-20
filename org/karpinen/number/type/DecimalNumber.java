@@ -4,7 +4,7 @@ import org.karpinen.number.core.BaseConvert;
 import org.karpinen.number.core.Number;
 
 public class DecimalNumber extends Number implements BaseConvert {
-    private BinaryNumber bn;
+    private final BinaryNumber bn;
 
     public DecimalNumber(String s) {
         super(s, 10);
@@ -29,7 +29,7 @@ public class DecimalNumber extends Number implements BaseConvert {
 
     @Override
     public int base10() {
-        return Integer.valueOf(getInput());
+        return Integer.parseInt(getInput());
     }
 
     @Override

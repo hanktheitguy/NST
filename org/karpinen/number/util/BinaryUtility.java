@@ -1,8 +1,8 @@
 package org.karpinen.number.util;
 
-public class BinaryUtil {
+public class BinaryUtility {
 
-    public BinaryUtil() { }
+    public BinaryUtility() { }
 
     //Retrieve a substring by size and length. This is for @inputString that's inherited.
     private String getSubstringBySize(int groupSize, int endpoint, String s) {

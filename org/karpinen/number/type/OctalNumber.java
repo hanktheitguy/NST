@@ -4,7 +4,7 @@ import org.karpinen.number.core.BaseConvert;
 import org.karpinen.number.core.Number;
 
 public class OctalNumber extends Number implements BaseConvert {
-    private BinaryNumber bn;
+    private final BinaryNumber bn;
 
     public OctalNumber(String s) {
         super(s, 8);
@@ -16,7 +16,7 @@ public class OctalNumber extends Number implements BaseConvert {
         StringBuilder oct = new StringBuilder();
         for (char c : getInput().toCharArray()) {
             switch (c) {
-                case '0': oct.append(""); break;
+                case '0': break;
                 case '1': oct.append("001"); break;
                 case '2': oct.append("10"); break;
                 case '3': oct.append("11"); break;

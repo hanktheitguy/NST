@@ -100,39 +100,10 @@ public class GUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        NumberConverter nc = new NumberConverter();
-        switch ((String) targetNS.getSelectedItem()) {
-            case "Binary":
-                outputArea.setText(nc.convert(getObjectType(), 2));
-                break;
-            case "Octal":
-                outputArea.setText(nc.convert(getObjectType(), 8));
-                break;
-            case "Decimal":
-                outputArea.setText(nc.convert(getObjectType(), 10));
-                break;
-            case "Hexadecimal":
-                outputArea.setText(nc.convert(getObjectType(), 16));
-                break;
-        }
-    }
-
-    private Object getObjectType() {
-        Object o = null;
-        switch ((String) startNS.getSelectedItem()) {
-            case "Binary":
-                o = new BinaryNumber(inputField.getText());
-                break;
-            case "Decimal":
-                o = new DecimalNumber(inputField.getText());
-                break;
-            case "Hexadecimal":
-                o = new HexadecimalNumber(inputField.getText());
-                break;
-            case "Octal":
-                o = new OctalNumber(inputField.getText());
-                break;
-        }
-        return o;
+        String startSys = (String) startNS.getSelectedItem();
+        String targetSys = (String) targetNS.getSelectedItem();
+        String input = inputField.getText();
+        NumberConverter nc = new NumberConverter(startSys, targetSys, input);
+        outputArea.setText(nc.getResult());
     }
 }

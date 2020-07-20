@@ -4,7 +4,7 @@ import org.karpinen.number.core.BaseConvert;
 import org.karpinen.number.core.Number;
 
 public class HexadecimalNumber extends Number implements BaseConvert {
-    private BinaryNumber bn;
+    private final BinaryNumber bn;
 
     public HexadecimalNumber(String s) {
         super(s, 16);

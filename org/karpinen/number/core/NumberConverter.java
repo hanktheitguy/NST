@@ -6,9 +6,15 @@ import org.karpinen.number.type.HexadecimalNumber;
 import org.karpinen.number.type.OctalNumber;
 
 public class NumberConverter {
-    public NumberConverter() { }
+    private NumberResolver resolve = new NumberResolver();
+    private String result;
 
-    public String convert(Object object, int targetBase) {
+    public NumberConverter(String startSys, String targetSys, String input) {
+        convertToTargetBase
+                (resolve.getNumberType(startSys, input), resolve.getBaseIdentifier(targetSys));
+    }
+
+    private void convertToTargetBase(Object object, int targetBase) {
         String s = null;
         if(object instanceof BinaryNumber) {
             BinaryNumber bn = (BinaryNumber) object;
@@ -43,6 +49,10 @@ public class NumberConverter {
                 case 16: s = on.base16(); break;
             }
         }
-        return s;
+        result = s;
+    }
+
+    public String getResult() {
+        return result;
     }
 }
