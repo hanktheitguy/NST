@@ -32,6 +32,7 @@ public class Number {
         }
     }
 
+    //Returns the base identifier.
     public NumberBase getBase() {
         return base;
     }

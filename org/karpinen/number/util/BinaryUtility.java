@@ -41,7 +41,10 @@ public class BinaryUtility {
         }
         return concatRemaining(endpoint, groupSize, sb, s).reverse().toString();
     }
-
+    /*
+    If there are any remaining characters outside input.length % groupSize, it will convert it
+    to decimal and append it to the string.
+     */
     private StringBuilder concatRemaining(int endpoint, int groupSize, StringBuilder s, String input) {
         boolean hasRemainder = input.length() % groupSize > 0;
         if(hasRemainder) {
@@ -51,6 +54,10 @@ public class BinaryUtility {
         return s;
     }
 
+    /*
+    Converts the string to decimal by looping through all characters in the string using
+    exp function.
+     */
     public int base10(String s) {
         char[] binary = new StringBuilder(s).reverse().toString().toCharArray();
         int iteration = 0;

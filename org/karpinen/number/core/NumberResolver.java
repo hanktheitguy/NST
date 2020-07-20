@@ -9,6 +9,7 @@ public class NumberResolver {
 
     public NumberResolver() { }
 
+    //Returns the @NumberType based on the inputted params.
     public Object getNumberType(String type, String input) {
         Object o = null;
         switch (type) {
@@ -20,6 +21,7 @@ public class NumberResolver {
         return o;
     }
 
+    //Returns the base identifier for the param number system.
     public int getBaseIdentifier(String type) {
         int i = -1;
         switch (type) {
