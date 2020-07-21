@@ -1,4 +1,4 @@
-package org.karpinen.number.util;
+package org.karpinen.nst.number.util;
 
 public class BinaryUtility {
 

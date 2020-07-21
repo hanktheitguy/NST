@@ -1,9 +1,9 @@
-package org.karpinen.number.core;
+package org.karpinen.nst.number.core;
 
-import org.karpinen.number.type.BinaryNumber;
-import org.karpinen.number.type.DecimalNumber;
-import org.karpinen.number.type.HexadecimalNumber;
-import org.karpinen.number.type.OctalNumber;
+import org.karpinen.nst.number.type.BinaryNumber;
+import org.karpinen.nst.number.type.DecimalNumber;
+import org.karpinen.nst.number.type.HexadecimalNumber;
+import org.karpinen.nst.number.type.OctalNumber;
 
 public class NumberResolver {
 

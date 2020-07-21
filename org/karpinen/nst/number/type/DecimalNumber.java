@@ -1,7 +1,7 @@
-package org.karpinen.number.type;
+package org.karpinen.nst.number.type;
 
-import org.karpinen.number.core.BaseConvert;
-import org.karpinen.number.core.Number;
+import org.karpinen.nst.number.core.BaseConvert;
+import org.karpinen.nst.number.core.Number;
 
 public class DecimalNumber extends Number implements BaseConvert {
     private final BinaryNumber bn;

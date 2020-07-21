@@ -1,16 +1,12 @@
-package org.karpinen.gui;
+package org.karpinen.nst.gui.calc;
 
-import org.karpinen.number.core.NumberConverter;
-import org.karpinen.number.type.BinaryNumber;
-import org.karpinen.number.type.DecimalNumber;
-import org.karpinen.number.type.HexadecimalNumber;
-import org.karpinen.number.type.OctalNumber;
+import org.karpinen.nst.number.core.NumberConverter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NSTConvert extends JFrame implements ActionListener {
+public class NSTCalculator extends JFrame implements ActionListener {
     JFrame frame = new JFrame("Number System Tool");
     JTextField inputField = new JTextField();
     JTextArea outputArea = new JTextArea("Operation Output displays here.");
@@ -20,7 +16,7 @@ public class NSTConvert extends JFrame implements ActionListener {
     JLabel startBase = new JLabel("StartNS");
     JLabel targetBase = new JLabel("TargetNS");
 
-    public NSTConvert() {
+    public NSTCalculator() {
         init();
     }
 
@@ -37,7 +33,7 @@ public class NSTConvert extends JFrame implements ActionListener {
 
     //Sets the JFrame properties.
     private void setFrameProperties() {
-        frame.setSize(400, 200);
+        frame.setSize(400, 300);
         frame.setLayout(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

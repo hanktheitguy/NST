@@ -1,4 +1,4 @@
-package org.karpinen.number.core;
+package org.karpinen.nst.number.core;
 
 public interface BaseConvert {
     String base2();

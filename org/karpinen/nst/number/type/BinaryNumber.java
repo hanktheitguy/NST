@@ -1,8 +1,8 @@
-package org.karpinen.number.type;
+package org.karpinen.nst.number.type;
 
-import org.karpinen.number.core.BaseConvert;
-import org.karpinen.number.core.Number;
-import org.karpinen.number.util.BinaryUtility;
+import org.karpinen.nst.number.core.BaseConvert;
+import org.karpinen.nst.number.core.Number;
+import org.karpinen.nst.number.util.BinaryUtility;
 
 public class BinaryNumber extends Number implements BaseConvert {
     private final BinaryUtility util = new BinaryUtility();
