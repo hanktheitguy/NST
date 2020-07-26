@@ -1,27 +1,30 @@
-package org.karpinen.nst.gui.calc;
+package org.karpinen.nst.gui;
 
-import org.karpinen.nst.number.core.NumberConverter;
+import org.karpinen.nst.number.convert.Converter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NSTCalculator extends JFrame implements ActionListener {
-    JFrame frame = new JFrame("Number System Tool");
-    JTextField inputField = new JTextField();
-    JTextArea outputArea = new JTextArea("Operation Output displays here.");
-    JButton convertButton = new JButton("Convert");
-    JComboBox startNS = new JComboBox();
-    JComboBox targetNS = new JComboBox();
-    JLabel startBase = new JLabel("StartNS");
-    JLabel targetBase = new JLabel("TargetNS");
+public class NSTConvert extends JFrame implements ActionListener {
+    private JFrame frame;
+    private JTextField inputField = new JTextField();
+    private JTextArea outputArea = new JTextArea("Operation Output displays here.");
+    private JButton runButton = new JButton("Convert");
+    private JComboBox startNS = new JComboBox();
+    private JComboBox targetNS = new JComboBox();
+    private JLabel startBase = new JLabel("StartNS");
+    private JLabel targetBase = new JLabel("TargetNS");
+    private Converter converter = new Converter();
 
-    public NSTCalculator() {
+    public NSTConvert() {
+
         init();
     }
 
     //Initiation.
     private void init() {
+        frame = new JFrame("NST");
         setTextAreaProperties();
         setLabelProperties();
         setBoxProperties();
@@ -33,7 +36,7 @@ public class NSTCalculator extends JFrame implements ActionListener {
 
     //Sets the JFrame properties.
     private void setFrameProperties() {
-        frame.setSize(400, 300);
+        frame.setSize(565, 300);
         frame.setLayout(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +45,7 @@ public class NSTCalculator extends JFrame implements ActionListener {
 
     //Adds the components to the JFrame.
     private void addComponents() {
-        frame.add(convertButton);
+        frame.add(runButton);
         frame.add(inputField);
         frame.add(startNS);
         frame.add(targetNS);
@@ -54,12 +57,12 @@ public class NSTCalculator extends JFrame implements ActionListener {
     //Set's the ComboBox(s) label properties.
     private void setLabelProperties() {
         //Sets properties for the starting base label.
-        startBase.setBounds(10, 10, 60, 12);
+        startBase.setBounds(10, 10, 120, 12);
         startBase.setText("StartNS");
         startBase.setVisible(true);
 
         //Sets properties for the target base label.
-        targetBase.setBounds(200, 10, 60, 12);
+        targetBase.setBounds(235, 10, 120, 12);
         targetBase.setText("TargetNS");
         targetBase.setVisible(true);
     }
@@ -67,7 +70,7 @@ public class NSTCalculator extends JFrame implements ActionListener {
     //Sets the ComboBox Properties.
     private void setBoxProperties() {
         //StartingNS properties.
-        startNS.setBounds(10, 25,180 , 30);
+        startNS.setBounds(10, 25,220 , 30);
         startNS.addItem("Binary");
         startNS.addItem("Decimal");
         startNS.addItem("Hexadecimal");
@@ -75,7 +78,7 @@ public class NSTCalculator extends JFrame implements ActionListener {
         startNS.setVisible(true);
 
         //TargetNS properties.
-        targetNS.setBounds(200, 25, 180, 30);
+        targetNS.setBounds(235, 25, 220, 30);
         targetNS.addItem("Binary");
         targetNS.addItem("Decimal");
         targetNS.addItem("Hexadecimal");
@@ -85,30 +88,34 @@ public class NSTCalculator extends JFrame implements ActionListener {
 
     //Set the inputField properties.
     private void setFieldProperties() {
-        inputField.setBounds(10, 60, 280, 30);
+        inputField.setBounds(10, 60, 536, 30);
         inputField.setVisible(true);
     }
 
     //Set the convertButton properties.
     private void setButtonProperties() {
-        convertButton.setBounds(295, 60, 85, 30);
-        convertButton.addActionListener(this);
-        convertButton.setVisible(true);
+        runButton.setBounds(460, 25, 85, 30);
+        runButton.addActionListener(this);
+        runButton.setVisible(true);
     }
 
     //Set the outputArea properties.
     private void setTextAreaProperties() {
-        outputArea.setBounds(10, 100, 370, 50);
+        outputArea.setBounds(10, 95, 535, 160);
         outputArea.setVisible(true);
     }
 
     @Override
     //Listener for convertButton interaction.
     public void actionPerformed(ActionEvent e) {
-        String startSys = (String) startNS.getSelectedItem();
-        String targetSys = (String) targetNS.getSelectedItem();
+        int startID = converter.resolveBaseID(startNS.getSelectedItem().toString());
+        int endID = converter.resolveBaseID(targetNS.getSelectedItem().toString());
         String input = inputField.getText();
-        NumberConverter nc = new NumberConverter(startSys, targetSys, input);
-        outputArea.setText(nc.getResult());
+        String output = converter.convert(input, startID, endID);
+        if(output != null) {
+            outputArea.setText(output);
+        }else{
+            outputArea.setText("Error: Type Mismatch.");
+        }
     }
 }

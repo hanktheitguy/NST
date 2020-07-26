@@ -1,59 +1,97 @@
 package org.karpinen.nst.number.core;
 
-public class Number {
-    private NumberBase base;
-    private String input;
-    private NumberValidator validator;
+public class Number
+{
+    private Base       base;
+    private String     input;
+    private int        lenLimit = 128;
+    private boolean    usable = true;
+    private char[]     chars;
 
-    //Constructor method for Number.
-    public Number(String input, int baseIdentifier) {
-        init(input, baseIdentifier);
+    public Number (String input, int baseID)
+    {
+        create (input, baseID);
     }
 
-    //Sets the variable values, then validates the number off constraints.
-    private void init(String input, int baseIdentifier) {
-        setVariableValue(input, baseIdentifier);
-        startValidation();
+    private void create (String input, int ID)
+    {
+        setInput  (input);
+        setBaseType (ID);
+        validate();
     }
 
-    //Sets the class variables to their appropiate values.
-    private void setVariableValue(String input, int baseIdentifier) {
-        setBase(baseIdentifier);
-        setInput(input);
+    private boolean obeyLengthLimit ()
+    {
+        return input.length() < lenLimit;
     }
 
-    //Sets @base value to the proper NumberBase enum value.
-    private void setBase(int baseIdentifier) {
-        switch (baseIdentifier) {
-            case 2: base = NumberBase.Binary; break;
-            case 8: base = NumberBase.Octal; break;
-            case 10: base = NumberBase.Decimal; break;
-            case 16: base = NumberBase.Hexadecimal; break;
+    private boolean obeyCharRule (String s)
+    {
+        for ( char c : chars ) {
+            if (!base.getChars().contains(c))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void validate ()
+    {
+        if (!obeyLengthLimit())
+        {
+            usable = false;
+        }
+        if (!obeyCharRule(input))
+        {
+            usable = false;
         }
     }
 
-    //Returns the base identifier.
-    public NumberBase getBase() {
+    public String getInput ()
+    {
+        return input;
+    }
+
+    public Base getBase ()
+    {
         return base;
     }
 
-    //Set's the input variable value.
-    private void setInput(String s) {
-        this.input = s;
+    public boolean isUsable ()
+    {
+        return usable;
     }
 
-    //Instantiates @NumberValidator which is used to validate the number.
-    private void startValidation() {
-        validator = new NumberValidator(input, base);
+    private void setBaseType ( int baseID )
+    {
+        switch (baseID) {
+            case 2:  base = Base.BASE2;  break;
+            case 8:  base = Base.BASE8;  break;
+            case 10: base = Base.BASE10; break;
+            case 16: base = Base.BASE16; break;
+        }
     }
 
-    //Returns whether the number is valid based off constraints.
-    public boolean isValid() {
-        return validator.isValid();
+    public void setUsable (boolean b)
+    {
+        usable = b;
     }
 
-    //Returns the original input string value.
-    public String getInput() {
-        return input;
+    public void setInput (String s)
+    {
+        input = s;
+        chars = s.toCharArray();
+    }
+
+    public void setLengthLimit (int limit)
+    {
+        lenLimit = limit;
+        validate();
+    }
+
+    public void update (String input, int baseID)
+    {
+        create (input, baseID);
     }
 }
