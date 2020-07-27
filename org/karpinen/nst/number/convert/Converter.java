@@ -38,8 +38,8 @@ public class Converter
         switch (beginID)
         {
             case 2:  c = binUtil.convert (s, endID); break;
-            case 8:  c = decUtil.convert (s, endID); break;
-            case 10: c = octUtil.convert (s, endID); break;
+            case 8:  c = octUtil.convert (s, endID); break;
+            case 10: c = decUtil.convert (s, endID); break;
             case 16: c = hexUtil.convert (s, endID); break;
         }
         return c;
