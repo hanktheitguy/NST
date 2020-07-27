@@ -1,5 +1,7 @@
 package org.karpinen.nst.number.util;
 
+import org.jetbrains.annotations.NotNull;
+
 public class DecUtil
 {
     private BinUtil util;
@@ -23,16 +25,14 @@ public class DecUtil
         return c;
     }
 
-    private String base2 (String input)
+    private @NotNull String base2 (String input)
     {
         StringBuilder base2 = new StringBuilder();
         int dividend = Integer.parseInt (input);
         while (dividend > 0)
         {
             base2.append (dividend % 2);
-            System.out.println("Debug-Base2: " + base2);
             dividend /= 2;
-            System.out.println("Debug-Dividend: " + dividend);
         }
         return base2.reverse().toString();
     }
